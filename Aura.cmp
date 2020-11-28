@@ -1,0 +1,60 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global" 
+                controller = "covid19controller">
+    <aura:attribute name = "confirmed" type = "String"/>
+    <aura:attribute name = "recovered" type = "String"/>
+    <aura:attribute name = "deaths" type = "String"/>
+    <aura:attribute name = "active" type = "String"/>
+    <aura:attribute name = "state" type = "String"/>
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}"/>
+    
+    <!--Table attributes--> 
+    <aura:attribute name ="data" type = "Object"/>
+    <aura:attribute name ="columns" type = "List"/>
+    
+    <div class="slds-p-around_medium">
+        <div class = "slds-page-header"> 
+            <div class = "slds-grid">
+                
+                <div class="slds-col slds-size_11-of-12">
+                    <span style ="font-size:20px;" >INDIA's COVID-19 TRACKER</span>
+                </div>
+                <div class="slds-col slds-size_1-of-12">
+                    <lightning:buttonIcon iconName="utility:refresh" variant="brand" onclick="{!c.doInit}" alternativeText="Settings" title="Settings"/>
+                    
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <lightning:tabset>
+            <lightning:tab label="Updated Data">
+                <div class = "slds-grid">
+                    
+                    <div class="slds-col slds-size_3-of-12" style ="background-color:red ;padding:10px;">
+                        <span style="color:white ;font-size:18px" > <b>TOTAL CONFIRMED CASES:{!v.confirmed}</b></span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style ="background-color:orange ;padding:10px;">
+                        <span style="color:white; font-size:18px"><b>ACTIVE CASES:{!v.active}</b></span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style ="background-color: skyblue ;padding:10px;">
+                        <span style="color:white; font-size:18px"><b>RECOVERED CASES:{!v.recovered}</b></span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style ="background-color:green ;padding:10px;">
+                        <span style="color:white ;font-size:18px"><b>DEATHS OCCURED:{!v.deaths}</b></span>
+                    </div>
+                </div>
+            </lightning:tab>
+        </lightning:tabset>
+        <!--Datatable-->
+        <div style = "height:100% ;font-size:17px ;padding:1%">
+            <lightning:datatable
+                                 keyField="id"
+                                 data="{! v.data}"
+                                 columns="{! v.columns}"
+                                 hideCheckboxColumn="true"/>
+        </div>
+    </div>
+</aura:component>
